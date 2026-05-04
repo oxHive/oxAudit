@@ -39,14 +39,25 @@ func (s *Server) Serve() error {
 	mux.HandleFunc("/api/content/", s.handleContent)
 	mux.HandleFunc("/", s.handleUI)
 
-	// Resolve actual address so we can print it before Listen.
 	l, err := net.Listen("tcp", s.Addr)
 	if err != nil {
 		return fmt.Errorf("dashboard listen %s: %w", s.Addr, err)
 	}
-	url := fmt.Sprintf("http://localhost:%d", l.Addr().(*net.TCPAddr).Port)
-	fmt.Printf("[oxaudit] Dashboard: %s\n         Output dir: %s\n         Press Ctrl+C to stop.\n", url, s.OutputDir)
-	openBrowser(url)
+	port := l.Addr().(*net.TCPAddr).Port
+	host := l.Addr().(*net.TCPAddr).IP.String()
+	localURL := fmt.Sprintf("http://localhost:%d", port)
+
+	fmt.Printf("[oxaudit] Dashboard: %s\n", localURL)
+
+	// When bound to all interfaces, also print LAN addresses for sharing.
+	if host == "0.0.0.0" {
+		for _, ip := range lanIPs() {
+			fmt.Printf("          Network:    http://%s:%d\n", ip, port)
+		}
+	}
+	fmt.Printf("          Output dir: %s\n          Press Ctrl+C to stop.\n", s.OutputDir)
+
+	openBrowser(localURL)
 	return http.Serve(l, mux)
 }
 
@@ -143,6 +154,38 @@ func (s *Server) handleContent(w http.ResponseWriter, r *http.Request) {
 func (s *Server) handleUI(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Write([]byte(dashboardHTML)) //nolint:errcheck
+}
+
+// lanIPs returns the machine's non-loopback IPv4 addresses.
+func lanIPs() []string {
+	var ips []string
+	ifaces, err := net.Interfaces()
+	if err != nil {
+		return ips
+	}
+	for _, iface := range ifaces {
+		if iface.Flags&net.FlagUp == 0 || iface.Flags&net.FlagLoopback != 0 {
+			continue
+		}
+		addrs, err := iface.Addrs()
+		if err != nil {
+			continue
+		}
+		for _, addr := range addrs {
+			var ip net.IP
+			switch v := addr.(type) {
+			case *net.IPNet:
+				ip = v.IP
+			case *net.IPAddr:
+				ip = v.IP
+			}
+			if ip == nil || ip.IsLoopback() || ip.To4() == nil {
+				continue
+			}
+			ips = append(ips, ip.String())
+		}
+	}
+	return ips
 }
 
 func openBrowser(url string) {

@@ -9,7 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var dashboardPort int
+var (
+	dashboardPort    int
+	dashboardNetwork bool
+)
 
 // runDashboard is also used as rootCmd.RunE so `oxaudit` (no args) opens the dashboard.
 func runDashboard(cmd *cobra.Command, args []string) error {
@@ -23,7 +26,11 @@ func runDashboard(cmd *cobra.Command, args []string) error {
 		outDir = cfg.Output.Directory
 	}
 
-	srv := dashboard.New(outDir, fmt.Sprintf(":%d", dashboardPort))
+	host := "127.0.0.1"
+	if dashboardNetwork {
+		host = "0.0.0.0"
+	}
+	srv := dashboard.New(outDir, fmt.Sprintf("%s:%d", host, dashboardPort))
 	return srv.Serve()
 }
 
@@ -34,7 +41,9 @@ var dashboardCmd = &cobra.Command{
 }
 
 func init() {
-	dashboardCmd.Flags().IntVar(&dashboardPort, "port", 7842, "port to listen on")
-	rootCmd.Flags().IntVar(&dashboardPort, "port", 7842, "port for the dashboard")
+	for _, f := range []*cobra.Command{dashboardCmd, rootCmd} {
+		f.Flags().IntVar(&dashboardPort, "port", 7842, "port to listen on")
+		f.Flags().BoolVar(&dashboardNetwork, "network", false, "bind to all interfaces so others on the LAN can connect")
+	}
 	rootCmd.AddCommand(dashboardCmd)
 }
