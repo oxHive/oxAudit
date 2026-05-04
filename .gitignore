@@ -1,0 +1,12 @@
+# Build artifacts
+oxaudit
+oxaudit.exe
+
+# Audit output directories — contain sensitive AWS inventory data
+aws-cost-audit/
+
+# Test output
+/tmp/oxaudit-*/
+
+# Go test cache
+*.test
