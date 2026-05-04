@@ -44,15 +44,16 @@ func (s *Server) Serve() error {
 		return fmt.Errorf("dashboard listen %s: %w", s.Addr, err)
 	}
 	port := l.Addr().(*net.TCPAddr).Port
-	host := l.Addr().(*net.TCPAddr).IP.String()
+	networkMode := strings.HasPrefix(s.Addr, "0.0.0.0")
 	localURL := fmt.Sprintf("http://localhost:%d", port)
 
 	fmt.Printf("[oxaudit] Dashboard: %s\n", localURL)
 
-	// When bound to all interfaces, also print LAN addresses for sharing.
-	if host == "0.0.0.0" {
-		for _, ip := range lanIPs() {
+	for _, ip := range lanIPs() {
+		if networkMode {
 			fmt.Printf("          Network:    http://%s:%d\n", ip, port)
+		} else {
+			fmt.Printf("          Network:    http://%s:%d  (add --network to enable)\n", ip, port)
 		}
 	}
 	fmt.Printf("          Output dir: %s\n          Press Ctrl+C to stop.\n", s.OutputDir)
