@@ -1,0 +1,40 @@
+package cmd
+
+import (
+	"fmt"
+	"path/filepath"
+
+	"github.com/graditya/oxaudit/internal/config"
+	"github.com/graditya/oxaudit/internal/dashboard"
+	"github.com/spf13/cobra"
+)
+
+var dashboardPort int
+
+// runDashboard is also used as rootCmd.RunE so `oxaudit` (no args) opens the dashboard.
+func runDashboard(cmd *cobra.Command, args []string) error {
+	outDir := "./aws-cost-audit"
+	configPath := cfgFile
+	if configPath == "" {
+		configPath = filepath.Join(outDir, "config.yaml")
+	}
+	// Best-effort config load to find the configured output directory.
+	if cfg, err := config.Load(configPath); err == nil {
+		outDir = cfg.Output.Directory
+	}
+
+	srv := dashboard.New(outDir, fmt.Sprintf(":%d", dashboardPort))
+	return srv.Serve()
+}
+
+var dashboardCmd = &cobra.Command{
+	Use:   "dashboard",
+	Short: "Launch the web dashboard to browse audit results",
+	RunE:  runDashboard,
+}
+
+func init() {
+	dashboardCmd.Flags().IntVar(&dashboardPort, "port", 7842, "port to listen on")
+	rootCmd.Flags().IntVar(&dashboardPort, "port", 7842, "port for the dashboard")
+	rootCmd.AddCommand(dashboardCmd)
+}

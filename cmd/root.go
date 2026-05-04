@@ -13,6 +13,7 @@ var (
 		Use:   "oxaudit",
 		Short: "Local AWS cost audit CLI",
 		Long:  "oxaudit collects AWS cost and inventory data, generates deterministic findings, and exports LLM-ready summaries.",
+		RunE:  runDashboard,
 	}
 )
 
