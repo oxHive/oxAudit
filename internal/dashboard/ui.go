@@ -378,7 +378,7 @@ const dashboardHTML = `<!DOCTYPE html>
     } else {
       // Plain text: use textContent to avoid any HTML interpretation
       var pre = document.createElement('pre');
-      pre.style.cssText = 'color:#e2e8f0;font-size:13px;line-height:1.6';
+      pre.style.cssText = 'font-size:13px;line-height:1.6';
       pre.textContent = text;
       mdEl.textContent = '';
       mdEl.appendChild(pre);
