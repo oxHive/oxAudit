@@ -138,6 +138,14 @@ const dashboardHTML = `<!DOCTYPE html>
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #3a4055; }
+    /* ── Print / PDF export ── */
+    @media print {
+      html, body { height: auto; overflow: visible; display: block; }
+      #sidebar  { display: none !important; }
+      #tab-bar  { display: none !important; }
+      #main     { width: 100%; height: auto; overflow: visible; }
+      #content  { overflow: visible; padding: 24px 48px; }
+    }
   </style>
 </head>
 <body>
