@@ -146,6 +146,36 @@ const dashboardHTML = `<!DOCTYPE html>
       #main     { width: 100%; height: auto; overflow: visible; }
       #content  { overflow: visible; padding: 24px 48px; }
     }
+    /* ── Tab bar controls ── */
+    #tab-bar-controls {
+      display: flex; align-items: center; gap: 8px;
+      margin-left: auto; flex-shrink: 0; padding-right: 4px;
+    }
+    .theme-btn {
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; cursor: pointer;
+      background: var(--header-bg);
+      border: 1px solid var(--border);
+      font-size: 14px;
+      transition: background .12s;
+      flex-shrink: 0; user-select: none;
+    }
+    .theme-btn:hover { background: var(--accent-soft); }
+    .pdf-btn {
+      padding: 5px 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity .12s;
+      line-height: 1;
+    }
+    .pdf-btn:hover { opacity: .85; }
   </style>
 </head>
 <body>
