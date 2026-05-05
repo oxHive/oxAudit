@@ -240,7 +240,14 @@ const dashboardHTML = `<!DOCTYPE html>
 </div>
 
 <div id="main">
-  <div id="tab-bar"></div>
+  <div id="tab-bar">
+  <div id="tab-bar-controls">
+    <div id="theme-toggle" class="theme-btn" title="Toggle light/dark mode">
+      <span id="theme-icon">🌙</span>
+    </div>
+    <button class="pdf-btn" onclick="window.print()">↓ Export PDF</button>
+  </div>
+</div>
   <div id="content">
     <div id="state-overlay">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -328,14 +335,15 @@ const dashboardHTML = `<!DOCTYPE html>
   }
 
   function renderTabs(files) {
-    tabBar.textContent = '';
+    document.querySelectorAll('.tab').forEach(function (el) { el.remove(); });
+    var controls = document.getElementById('tab-bar-controls');
     files.forEach(function (file) {
       var el = document.createElement('div');
       el.className = 'tab';
       el.textContent = tabLabel(file);
       el.dataset.file = file;
       el.addEventListener('click', function () { selectFile(file); });
-      tabBar.appendChild(el);
+      tabBar.insertBefore(el, controls);
     });
   }
 
