@@ -197,6 +197,28 @@ const dashboardHTML = `<!DOCTYPE html>
       border-color: #e5e7eb;
       border-bottom-color: #ffffff;
     }
+    html.light #md h1 { color: #111827; border-bottom-color: #e5e7eb; }
+    html.light #md h2 { color: #1e293b; border-bottom-color: #e5e7eb; }
+    html.light #md h3 { color: #374151; }
+    html.light #md h4 { color: #4b5563; }
+    html.light #md p  { color: #374151; }
+    html.light #md ul, html.light #md ol { color: #374151; }
+    html.light #md strong { color: #111827; }
+    html.light #md em    { color: #6b7280; }
+    html.light #md a     { color: #4f46e5; }
+    html.light #md blockquote {
+      background: rgba(99,102,241,.07);
+      border-left-color: #6366f1;
+      color: #4b5563;
+    }
+    html.light #md blockquote p { color: #4b5563; }
+    html.light #md hr { border-top-color: #e5e7eb; }
+    html.light #md code { background: #f3f4f6; color: #4f46e5; }
+    html.light #md pre  { background: #f3f4f6; border-color: #e5e7eb; }
+    html.light #md pre code { background: none; color: #1e293b; }
+    html.light #md th { background: #f3f4f6; color: #111827; border-color: #e5e7eb; }
+    html.light #md td { color: #374151; border-color: #e5e7eb; }
+    html.light #md tr:nth-child(even) td { background: rgba(0,0,0,.02); }
   </style>
 </head>
 <body>
