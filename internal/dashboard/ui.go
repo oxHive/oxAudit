@@ -265,6 +265,11 @@ const dashboardHTML = `<!DOCTYPE html>
 (function () {
   'use strict';
 
+  // Apply stored theme immediately to avoid flash of wrong mode.
+  if (localStorage.getItem('oxaudit-theme') === 'light') {
+    document.documentElement.classList.add('light');
+  }
+
   var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   document.getElementById('sidebar-tz').textContent = tz;
 
@@ -390,7 +395,17 @@ const dashboardHTML = `<!DOCTYPE html>
     mdEl.appendChild(p);
   }
 
+  function toggleTheme() {
+    var isLight = document.documentElement.classList.toggle('light');
+    document.getElementById('theme-icon').textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('oxaudit-theme', isLight ? 'light' : 'dark');
+  }
+
   function boot() {
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+    if (document.documentElement.classList.contains('light')) {
+      document.getElementById('theme-icon').textContent = '☀️';
+    }
     fetch('/api/runs')
       .then(function (res) { return res.json(); })
       .then(function (data) {
