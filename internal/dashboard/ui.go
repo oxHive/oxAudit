@@ -404,12 +404,13 @@ const dashboardHTML = `<!DOCTYPE html>
 
   function exportPDF() {
     var el = document.getElementById('md');
+    var bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#0f1117';
     var filename = (activeRun ? activeRun.folder_name : 'report') + '.pdf';
     html2pdf().set({
       margin: 16,
       filename: filename,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 2, backgroundColor: bg },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     }).from(el).save();
   }
