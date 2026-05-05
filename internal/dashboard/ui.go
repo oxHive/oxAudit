@@ -176,6 +176,27 @@ const dashboardHTML = `<!DOCTYPE html>
       line-height: 1;
     }
     .pdf-btn:hover { opacity: .85; }
+    /* ── Light mode ── */
+    html.light {
+      --bg:           #ffffff;
+      --sidebar-bg:   #f9fafb;
+      --header-bg:    #f3f4f6;
+      --border:       #e5e7eb;
+      --text:         #111827;
+      --text-muted:   #6b7280;
+      --text-dim:     #9ca3af;
+      --accent:       #6366f1;
+      --accent-soft:  rgba(99,102,241,0.10);
+      --accent-hover: #4f46e5;
+      --code-bg:      #f3f4f6;
+    }
+    html.light ::-webkit-scrollbar-thumb { background: #d1d5db; }
+    html.light ::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+    html.light .tab.active {
+      background: #ffffff;
+      border-color: #e5e7eb;
+      border-bottom-color: #ffffff;
+    }
   </style>
 </head>
 <body>
