@@ -8,6 +8,7 @@ const dashboardHTML = `<!DOCTYPE html>
   <title>oxAudit Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -245,7 +246,7 @@ const dashboardHTML = `<!DOCTYPE html>
     <div id="theme-toggle" class="theme-btn" title="Toggle light/dark mode">
       <span id="theme-icon">🌙</span>
     </div>
-    <button class="pdf-btn" onclick="window.print()">↓ Export PDF</button>
+    <button id="pdf-export-btn" class="pdf-btn">↓ Export PDF</button>
   </div>
 </div>
   <div id="content">
@@ -401,8 +402,21 @@ const dashboardHTML = `<!DOCTYPE html>
     localStorage.setItem('oxaudit-theme', isLight ? 'light' : 'dark');
   }
 
+  function exportPDF() {
+    var el = document.getElementById('md');
+    var filename = (activeRun ? activeRun.folder_name : 'report') + '.pdf';
+    html2pdf().set({
+      margin: 16,
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }).from(el).save();
+  }
+
   function boot() {
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+    document.getElementById('pdf-export-btn').addEventListener('click', exportPDF);
     if (document.documentElement.classList.contains('light')) {
       document.getElementById('theme-icon').textContent = '☀️';
     }
