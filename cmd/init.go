@@ -26,7 +26,7 @@ var initCmd = &cobra.Command{
 }
 
 func init() {
-	initCmd.Flags().StringVar(&initOutputDir, "output-dir", "./aws-cost-audit", "root output directory")
+	initCmd.Flags().StringVar(&initOutputDir, "output-dir", "~/.config/oxaudit", "root output directory")
 	initCmd.Flags().BoolVar(&initForce, "force", false, "overwrite existing config.yaml")
 	rootCmd.AddCommand(initCmd)
 }

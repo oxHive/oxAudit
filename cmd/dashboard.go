@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/graditya/oxaudit/internal/config"
@@ -16,14 +17,18 @@ var (
 
 // runDashboard is also used as rootCmd.RunE so `oxaudit` (no args) opens the dashboard.
 func runDashboard(cmd *cobra.Command, args []string) error {
-	outDir := "./aws-cost-audit"
+	outDir := "~/.config/oxaudit"
 	configPath := cfgFile
 	if configPath == "" {
-		configPath = filepath.Join(outDir, "config.yaml")
+		home, err := os.UserHomeDir()
+		if err != nil {
+			home = "~"
+		}
+		configPath = filepath.Join(home, ".config", "oxaudit", "config.yaml")
 	}
 	// Best-effort config load to find the configured output directory.
 	if cfg, err := config.Load(configPath); err == nil {
-		outDir = cfg.Output.Directory
+		outDir = config.ResolvePath(cfg.Output.Directory)
 	}
 
 	host := "127.0.0.1"

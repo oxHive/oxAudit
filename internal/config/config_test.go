@@ -3,7 +3,6 @@ package config
 import (
 	"os"
 	"path/filepath"
-	"strings"
 	"testing"
 )
 
@@ -13,8 +12,7 @@ func TestDefaultDBPathUsesConfigDir(t *testing.T) {
 		t.Skip("cannot determine home dir")
 	}
 	cfg := defaults()
-	// defaults() returns tilde string; resolve it
-	got := filepath.Join(ResolvePath(cfg.Output.Directory), "db", "aws_cost_audit.sqlite")
+	got := cfg.DBPath()
 	want := filepath.Join(home, ".config", "oxaudit", "db", "aws_cost_audit.sqlite")
 	if got != want {
 		t.Errorf("got %s, want %s", got, want)
@@ -23,9 +21,10 @@ func TestDefaultDBPathUsesConfigDir(t *testing.T) {
 
 func TestResolvePathExpandsTilde(t *testing.T) {
 	home, _ := os.UserHomeDir()
+	want := filepath.Join(home, ".config", "oxaudit")
 	got := ResolvePath("~/.config/oxaudit")
-	if !strings.HasPrefix(got, home) {
-		t.Errorf("ResolvePath did not expand tilde: got %s", got)
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
 	}
 }
 
