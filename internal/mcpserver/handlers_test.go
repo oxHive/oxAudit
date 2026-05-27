@@ -294,9 +294,15 @@ func TestGetCostBreakdown_ByAccount(t *testing.T) {
 		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
 	}
 	var out map[string]interface{}
-	json.Unmarshal([]byte(cr.Content[0].Text), &out)
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &out); err != nil {
+		t.Fatalf("response not JSON: %s", cr.Content[0].Text)
+	}
 	if out["group_by"] != "account" {
 		t.Errorf("expected group_by=account, got %v", out["group_by"])
+	}
+	data, ok := out["data"].([]interface{})
+	if !ok || len(data) == 0 {
+		t.Errorf("expected non-empty account cost data, got: %v", out["data"])
 	}
 }
 
@@ -335,10 +341,18 @@ func TestQueryResources_StateFilter(t *testing.T) {
 		"name":      "query_resources",
 		"arguments": map[string]interface{}{"state": "stopped"},
 	})
-	result, _ := srv.handleToolsCall(context.Background(), paramsBytes)
+	result, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
+	if rpcErr != nil {
+		t.Fatalf("rpc error: %v", rpcErr)
+	}
 	cr := result.(CallResult)
+	if cr.IsError {
+		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
+	}
 	var resources []interface{}
-	json.Unmarshal([]byte(cr.Content[0].Text), &resources)
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &resources); err != nil {
+		t.Fatalf("response not JSON array: %s", cr.Content[0].Text)
+	}
 	if len(resources) != 1 {
 		t.Errorf("expected 1 stopped resource, got %d", len(resources))
 	}

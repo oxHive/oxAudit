@@ -228,6 +228,9 @@ func (s *Server) handleGetCostBreakdown(ctx context.Context, args map[string]int
 		groupBy = "service"
 	}
 	months := intArg(args, "months", 3)
+	if months < 1 {
+		months = 3
+	}
 
 	groupCol := "service"
 	if groupBy == "account" {
@@ -258,7 +261,7 @@ func (s *Server) handleGetCostBreakdown(ctx context.Context, args map[string]int
 	for rows.Next() {
 		var r costRow
 		if err := rows.Scan(&r.Group, &r.Month, &r.Total); err != nil {
-			continue
+			return textErr("scan error: " + err.Error())
 		}
 		results = append(results, r)
 	}
@@ -335,7 +338,7 @@ func (s *Server) handleQueryResources(ctx context.Context, args map[string]inter
 		var estCost sql.NullFloat64
 		if err := rows.Scan(&r.ResourceID, &r.ResourceType, &r.AccountID, &r.AccountName,
 			&r.Region, &r.Service, &r.State, &r.Name, &estCost, &r.Tags); err != nil {
-			continue
+			return textErr("scan error: " + err.Error())
 		}
 		if estCost.Valid {
 			r.EstCost = &estCost.Float64
