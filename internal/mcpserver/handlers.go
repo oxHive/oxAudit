@@ -377,10 +377,9 @@ func (s *Server) handleRunAudit(ctx context.Context, _ map[string]interface{}) (
 	// Refresh auditRunID to pick up the newly completed run.
 	s.mu.Lock()
 	var newRunID string
-	s.db.QueryRowContext(ctx,
+	if err := s.db.QueryRowContext(ctx,
 		`SELECT id FROM audit_run WHERE status = 'complete' ORDER BY executed_at DESC LIMIT 1`,
-	).Scan(&newRunID)
-	if newRunID != "" {
+	).Scan(&newRunID); err == nil {
 		s.auditRunID = newRunID
 	}
 	s.mu.Unlock()
