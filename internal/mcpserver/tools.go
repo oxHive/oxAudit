@@ -26,12 +26,12 @@ func allTools() []Tool {
 		{
 			Name:        "run_audit",
 			Description: "Run the full oxaudit pipeline (collect → ingest → analyze → export). Use when the user wants to run or refresh the AWS cost audit. Returns pipeline output and any errors.",
-			InputSchema: InputSchema{Type: "object"},
+			InputSchema: InputSchema{Type: "object", Properties: map[string]Property{}},
 		},
 		{
 			Name:        "get_summary",
 			Description: "Get an overview of the latest audit run: accounts scanned, regions, finding counts by priority (P0–P3), and total estimated monthly savings in USD.",
-			InputSchema: InputSchema{Type: "object"},
+			InputSchema: InputSchema{Type: "object", Properties: map[string]Property{}},
 		},
 		{
 			Name:        "list_findings",

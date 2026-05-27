@@ -124,8 +124,10 @@ type toolsCallParams struct {
 
 func (s *Server) handleToolsCall(ctx context.Context, params json.RawMessage) (interface{}, *rpcError) {
 	var p toolsCallParams
-	if err := json.Unmarshal(params, &p); err != nil {
-		return nil, &rpcError{Code: -32602, Message: "invalid params"}
+	if len(params) > 0 {
+		if err := json.Unmarshal(params, &p); err != nil {
+			return nil, &rpcError{Code: -32602, Message: "invalid params"}
+		}
 	}
 	if p.Arguments == nil {
 		p.Arguments = map[string]interface{}{}

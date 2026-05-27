@@ -82,6 +82,20 @@ func TestUnknownMethod(t *testing.T) {
 	}
 }
 
+func TestToolsCallMissingArguments(t *testing.T) {
+	srv := newTestServer(t)
+	// tools/call with no "arguments" key — valid for tools like get_summary
+	resp := serverRoundTrip(t, srv, map[string]interface{}{
+		"jsonrpc": "2.0",
+		"id":      5,
+		"method":  "tools/call",
+		"params":  map[string]interface{}{"name": "get_summary"},
+	})
+	if resp["error"] != nil {
+		t.Errorf("expected no rpc error for missing arguments, got: %v", resp["error"])
+	}
+}
+
 func TestNotificationIgnored(t *testing.T) {
 	srv := newTestServer(t)
 	// Notifications have no "id" — server must not respond
