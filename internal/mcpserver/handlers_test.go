@@ -213,3 +213,133 @@ func TestGetSummary_Empty(t *testing.T) {
 		t.Errorf("expected audit_run_id=%s, got %v", runID, out["audit_run_id"])
 	}
 }
+
+func insertCosts(t *testing.T, d *sql.DB) {
+	t.Helper()
+	_, err := d.Exec(`
+		INSERT INTO cost_monthly
+			(audit_run_id, month, account_id, account_name, service,
+			 unblended_cost, amortized_cost)
+		VALUES
+		(?, date('now', 'start of month'), '123456789012', 'prod', 'EC2', 150.0, 145.0),
+		(?, date('now', 'start of month'), '123456789012', 'prod', 'RDS', 80.0, 78.0)`,
+		testRunID, testRunID)
+	if err != nil {
+		t.Fatalf("insert costs: %v", err)
+	}
+}
+
+func insertResources(t *testing.T, d *sql.DB) {
+	t.Helper()
+	_, err := d.Exec(`
+		INSERT INTO resources
+			(audit_run_id, resource_id, resource_type, account_id, account_name,
+			 region, service, state, name, tags_json, raw_json, discovered_at)
+		VALUES
+		(?, 'vol-abc', 'aws:ec2:volume', '123456789012', 'prod',
+		 'us-east-1', 'EC2', 'available', 'my-volume', '{}', '{}', datetime('now')),
+		(?, 'i-12345', 'aws:ec2:instance', '123456789012', 'prod',
+		 'us-east-1', 'EC2', 'stopped', 'web-server', '{}', '{}', datetime('now'))`,
+		testRunID, testRunID)
+	if err != nil {
+		t.Fatalf("insert resources: %v", err)
+	}
+}
+
+func TestGetCostBreakdown_ByService(t *testing.T) {
+	d, runID := setupTestDB(t)
+	insertCosts(t, d)
+	srv := New(d, runID)
+
+	paramsBytes, _ := json.Marshal(map[string]interface{}{
+		"name":      "get_cost_breakdown",
+		"arguments": map[string]interface{}{"group_by": "service"},
+	})
+	result, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
+	if rpcErr != nil {
+		t.Fatalf("rpc error: %v", rpcErr)
+	}
+	cr := result.(CallResult)
+	if cr.IsError {
+		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
+	}
+	var out map[string]interface{}
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &out); err != nil {
+		t.Fatalf("response not JSON: %s", cr.Content[0].Text)
+	}
+	data, ok := out["data"].([]interface{})
+	if !ok || len(data) == 0 {
+		t.Errorf("expected non-empty cost data, got: %v", out)
+	}
+	if out["group_by"] != "service" {
+		t.Errorf("expected group_by=service, got %v", out["group_by"])
+	}
+}
+
+func TestGetCostBreakdown_ByAccount(t *testing.T) {
+	d, runID := setupTestDB(t)
+	insertCosts(t, d)
+	srv := New(d, runID)
+
+	paramsBytes, _ := json.Marshal(map[string]interface{}{
+		"name":      "get_cost_breakdown",
+		"arguments": map[string]interface{}{"group_by": "account"},
+	})
+	result, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
+	if rpcErr != nil {
+		t.Fatalf("rpc error: %v", rpcErr)
+	}
+	cr := result.(CallResult)
+	if cr.IsError {
+		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
+	}
+	var out map[string]interface{}
+	json.Unmarshal([]byte(cr.Content[0].Text), &out)
+	if out["group_by"] != "account" {
+		t.Errorf("expected group_by=account, got %v", out["group_by"])
+	}
+}
+
+func TestQueryResources_NoFilter(t *testing.T) {
+	d, runID := setupTestDB(t)
+	insertResources(t, d)
+	srv := New(d, runID)
+
+	paramsBytes, _ := json.Marshal(map[string]interface{}{
+		"name":      "query_resources",
+		"arguments": map[string]interface{}{},
+	})
+	result, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
+	if rpcErr != nil {
+		t.Fatalf("rpc error: %v", rpcErr)
+	}
+	cr := result.(CallResult)
+	if cr.IsError {
+		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
+	}
+	var resources []interface{}
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &resources); err != nil {
+		t.Fatalf("response not JSON array: %s", cr.Content[0].Text)
+	}
+	if len(resources) != 2 {
+		t.Errorf("expected 2 resources, got %d", len(resources))
+	}
+}
+
+func TestQueryResources_StateFilter(t *testing.T) {
+	d, runID := setupTestDB(t)
+	insertResources(t, d)
+	srv := New(d, runID)
+
+	paramsBytes, _ := json.Marshal(map[string]interface{}{
+		"name":      "query_resources",
+		"arguments": map[string]interface{}{"state": "stopped"},
+	})
+	result, _ := srv.handleToolsCall(context.Background(), paramsBytes)
+	cr := result.(CallResult)
+	var resources []interface{}
+	json.Unmarshal([]byte(cr.Content[0].Text), &resources)
+	if len(resources) != 1 {
+		t.Errorf("expected 1 stopped resource, got %d", len(resources))
+	}
+}

@@ -218,12 +218,137 @@ func (s *Server) handleGetFinding(ctx context.Context, args map[string]interface
 	return textOK(f)
 }
 
-func (s *Server) handleGetCostBreakdown(_ context.Context, _ map[string]interface{}) (CallResult, *rpcError) {
-	return textErr("not yet implemented")
+func (s *Server) handleGetCostBreakdown(ctx context.Context, args map[string]interface{}) (CallResult, *rpcError) {
+	s.mu.RLock()
+	runID := s.auditRunID
+	s.mu.RUnlock()
+
+	groupBy := strArg(args, "group_by")
+	if groupBy != "account" {
+		groupBy = "service"
+	}
+	months := intArg(args, "months", 3)
+
+	groupCol := "service"
+	if groupBy == "account" {
+		groupCol = "account_id"
+	}
+
+	query := fmt.Sprintf(`
+		SELECT %s, month, SUM(unblended_cost) as total
+		FROM cost_monthly
+		WHERE audit_run_id = ?
+		  AND month >= date('now', '-%d months')
+		GROUP BY %s, month
+		ORDER BY total DESC`, groupCol, months, groupCol)
+
+	rows, err := s.db.QueryContext(ctx, query, runID)
+	if err != nil {
+		return textErr("query error: " + err.Error())
+	}
+	defer rows.Close()
+
+	type costRow struct {
+		Group string  `json:"group"`
+		Month string  `json:"month"`
+		Total float64 `json:"unblended_cost_usd"`
+	}
+
+	var results []costRow
+	for rows.Next() {
+		var r costRow
+		if err := rows.Scan(&r.Group, &r.Month, &r.Total); err != nil {
+			continue
+		}
+		results = append(results, r)
+	}
+	if err := rows.Err(); err != nil {
+		return textErr("query error: " + err.Error())
+	}
+	if results == nil {
+		results = []costRow{}
+	}
+	return textOK(map[string]interface{}{
+		"group_by": groupBy,
+		"months":   months,
+		"data":     results,
+	})
 }
 
-func (s *Server) handleQueryResources(_ context.Context, _ map[string]interface{}) (CallResult, *rpcError) {
-	return textErr("not yet implemented")
+func (s *Server) handleQueryResources(ctx context.Context, args map[string]interface{}) (CallResult, *rpcError) {
+	s.mu.RLock()
+	runID := s.auditRunID
+	s.mu.RUnlock()
+
+	resourceType := strArg(args, "resource_type")
+	state := strArg(args, "state")
+	region := strArg(args, "region")
+	accountID := strArg(args, "account_id")
+	limit := intArg(args, "limit", 50)
+
+	query := `SELECT resource_id, resource_type, account_id, account_name,
+	                 region, service, state, name, est_monthly_cost, tags_json
+	          FROM resources WHERE audit_run_id = ?`
+	queryArgs := []interface{}{runID}
+
+	if resourceType != "" {
+		query += " AND resource_type = ?"
+		queryArgs = append(queryArgs, resourceType)
+	}
+	if state != "" {
+		query += " AND state = ?"
+		queryArgs = append(queryArgs, state)
+	}
+	if region != "" {
+		query += " AND region = ?"
+		queryArgs = append(queryArgs, region)
+	}
+	if accountID != "" {
+		query += " AND account_id = ?"
+		queryArgs = append(queryArgs, accountID)
+	}
+	query += " ORDER BY COALESCE(est_monthly_cost, 0) DESC LIMIT ?"
+	queryArgs = append(queryArgs, limit)
+
+	rows, err := s.db.QueryContext(ctx, query, queryArgs...)
+	if err != nil {
+		return textErr("query error: " + err.Error())
+	}
+	defer rows.Close()
+
+	type resource struct {
+		ResourceID   string   `json:"resource_id"`
+		ResourceType string   `json:"resource_type"`
+		AccountID    string   `json:"account_id"`
+		AccountName  string   `json:"account_name"`
+		Region       string   `json:"region"`
+		Service      string   `json:"service"`
+		State        string   `json:"state"`
+		Name         string   `json:"name"`
+		EstCost      *float64 `json:"est_monthly_cost_usd"`
+		Tags         string   `json:"tags"`
+	}
+
+	var resources []resource
+	for rows.Next() {
+		var r resource
+		var estCost sql.NullFloat64
+		if err := rows.Scan(&r.ResourceID, &r.ResourceType, &r.AccountID, &r.AccountName,
+			&r.Region, &r.Service, &r.State, &r.Name, &estCost, &r.Tags); err != nil {
+			continue
+		}
+		if estCost.Valid {
+			r.EstCost = &estCost.Float64
+		}
+		resources = append(resources, r)
+	}
+	if err := rows.Err(); err != nil {
+		return textErr("query error: " + err.Error())
+	}
+	if resources == nil {
+		resources = []resource{}
+	}
+	return textOK(resources)
 }
 
 func (s *Server) handleRunAudit(_ context.Context, _ map[string]interface{}) (CallResult, *rpcError) {
