@@ -49,9 +49,11 @@ func (s *Server) handleGetSummary(ctx context.Context, _ map[string]interface{})
 	s.mu.RUnlock()
 
 	var periodStart, periodEnd, executedAt string
-	s.db.QueryRowContext(ctx,
+	if err := s.db.QueryRowContext(ctx,
 		`SELECT period_start, period_end, executed_at FROM audit_run WHERE id = ?`, runID,
-	).Scan(&periodStart, &periodEnd, &executedAt)
+	).Scan(&periodStart, &periodEnd, &executedAt); err != nil {
+		return textErr(fmt.Sprintf("audit run %s not found", runID))
+	}
 
 	var total, p0, p1, p2, p3 int
 	var totalSavings float64
@@ -149,9 +151,14 @@ func (s *Server) handleListFindings(ctx context.Context, args map[string]interfa
 	var findings []finding
 	for rows.Next() {
 		var f finding
-		rows.Scan(&f.ID, &f.Title, &f.Priority, &f.Category, &f.Service,
-			&f.Region, &f.Account, &f.Savings, &f.Confidence, &f.Risk, &f.Status)
+		if err := rows.Scan(&f.ID, &f.Title, &f.Priority, &f.Category, &f.Service,
+			&f.Region, &f.Account, &f.Savings, &f.Confidence, &f.Risk, &f.Status); err != nil {
+			continue
+		}
 		findings = append(findings, f)
+	}
+	if err := rows.Err(); err != nil {
+		return textErr("query error: " + err.Error())
 	}
 	if findings == nil {
 		findings = []finding{}

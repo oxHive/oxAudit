@@ -85,7 +85,9 @@ func callTool(t *testing.T, srv *Server, name string, args map[string]interface{
 		t.Fatalf("empty or wrong result type: %v", result)
 	}
 	var out map[string]interface{}
-	json.Unmarshal([]byte(cr.Content[0].Text), &out)
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &out); err != nil {
+		t.Fatalf("callTool %s: response is not JSON: %s", name, cr.Content[0].Text)
+	}
 	return out
 }
 
@@ -116,9 +118,20 @@ func TestListFindings_NoFilter(t *testing.T) {
 		"name":      "list_findings",
 		"arguments": map[string]interface{}{},
 	})
-	_, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
+	result, rpcErr := srv.handleToolsCall(context.Background(), paramsBytes)
 	if rpcErr != nil {
 		t.Fatalf("unexpected rpc error: %v", rpcErr)
+	}
+	cr := result.(CallResult)
+	if cr.IsError {
+		t.Fatalf("unexpected tool error: %s", cr.Content[0].Text)
+	}
+	var findings []interface{}
+	if err := json.Unmarshal([]byte(cr.Content[0].Text), &findings); err != nil {
+		t.Fatalf("response is not a JSON array: %s", cr.Content[0].Text)
+	}
+	if len(findings) != 2 {
+		t.Errorf("expected 2 findings, got %d", len(findings))
 	}
 }
 
@@ -184,5 +197,19 @@ func TestGetFinding_MissingID(t *testing.T) {
 	cr := result.(CallResult)
 	if !cr.IsError {
 		t.Errorf("expected IsError=true when finding_id missing")
+	}
+}
+
+func TestGetSummary_Empty(t *testing.T) {
+	d, runID := setupTestDB(t)
+	// No insertFindings — empty audit run
+	srv := New(d, runID)
+
+	out := callTool(t, srv, "get_summary", nil)
+	if out["total_findings"].(float64) != 0 {
+		t.Errorf("expected 0 findings, got %v", out["total_findings"])
+	}
+	if out["audit_run_id"] != runID {
+		t.Errorf("expected audit_run_id=%s, got %v", runID, out["audit_run_id"])
 	}
 }
