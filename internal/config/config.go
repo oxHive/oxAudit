@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -54,6 +55,21 @@ type Config struct {
 	} `yaml:"embeddings"`
 }
 
+// ResolvePath expands a leading ~ to the user home directory.
+func ResolvePath(p string) string {
+	if !strings.HasPrefix(p, "~/") && p != "~" {
+		return p
+	}
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return p
+	}
+	if p == "~" {
+		return home
+	}
+	return filepath.Join(home, p[2:])
+}
+
 func defaults() Config {
 	var cfg Config
 	cfg.AWS.Profile = "default"
@@ -61,7 +77,7 @@ func defaults() Config {
 	cfg.AWS.Regions.Mode = "auto"
 	cfg.Audit.StartDate = ""
 	cfg.Audit.EndDate = ""
-	cfg.Output.Directory = "./aws-cost-audit"
+	cfg.Output.Directory = "~/.config/oxaudit"
 	cfg.Analysis.OldSnapshotThresholdDays = 90
 	cfg.Analysis.StoppedEC2ThresholdDays = 30
 	cfg.Analysis.UnattachedEBSThresholdDays = 7
@@ -142,7 +158,7 @@ func (c *Config) Validate() error {
 
 // DBPath returns the path to the shared SQLite database.
 func (c *Config) DBPath() string {
-	return filepath.Join(c.Output.Directory, "db", "aws_cost_audit.sqlite")
+	return filepath.Join(ResolvePath(c.Output.Directory), "db", "aws_cost_audit.sqlite")
 }
 
 // WriteDefault writes a default config.yaml to path (does not overwrite).

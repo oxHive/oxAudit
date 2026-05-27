@@ -24,19 +24,20 @@ type runContext struct {
 // and inserts an audit_run record. The caller is responsible for closing DB.
 func loadRunContext() (*config.Config, *sql.DB, string, string, error) {
 	// Determine config path
-	outDir := "./aws-cost-audit"
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return nil, nil, "", "", fmt.Errorf("resolving home directory: %w", err)
+	}
 	configPath := cfgFile
 	if configPath == "" {
-		configPath = filepath.Join(outDir, "config.yaml")
-	} else {
-		outDir = filepath.Dir(configPath)
+		configPath = filepath.Join(home, ".config", "oxaudit", "config.yaml")
 	}
 
 	cfg, err := config.Load(configPath)
 	if err != nil {
 		return nil, nil, "", "", fmt.Errorf("loading config: %w\n\nRun 'oxaudit init' first.", err)
 	}
-	outDir = cfg.Output.Directory
+	outDir := config.ResolvePath(cfg.Output.Directory)
 
 	if err := cfg.Validate(); err != nil {
 		return nil, nil, "", "", fmt.Errorf("invalid config: %w", err)
