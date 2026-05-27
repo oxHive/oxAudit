@@ -357,3 +357,33 @@ func TestQueryResources_StateFilter(t *testing.T) {
 		t.Errorf("expected 1 stopped resource, got %d", len(resources))
 	}
 }
+
+func mustJSON(t *testing.T, v interface{}) []byte {
+	t.Helper()
+	b, err := json.Marshal(v)
+	if err != nil {
+		t.Fatalf("marshal: %v", err)
+	}
+	return b
+}
+
+func TestRunAudit_ConcurrentGuard(t *testing.T) {
+	d, runID := setupTestDB(t)
+	srv := New(d, runID)
+
+	// Acquire the run lock to simulate an in-progress audit.
+	srv.runMu.Lock()
+	defer srv.runMu.Unlock()
+
+	result, rpcErr := srv.handleToolsCall(context.Background(), mustJSON(t, map[string]interface{}{
+		"name":      "run_audit",
+		"arguments": map[string]interface{}{},
+	}))
+	if rpcErr != nil {
+		t.Fatalf("unexpected rpc error: %v", rpcErr)
+	}
+	cr := result.(CallResult)
+	if !cr.IsError {
+		t.Errorf("expected IsError=true when audit already running")
+	}
+}

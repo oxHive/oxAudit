@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"os"
+	"os/exec"
 )
 
 func textOK(v interface{}) (CallResult, *rpcError) {
@@ -354,6 +356,37 @@ func (s *Server) handleQueryResources(ctx context.Context, args map[string]inter
 	return textOK(resources)
 }
 
-func (s *Server) handleRunAudit(_ context.Context, _ map[string]interface{}) (CallResult, *rpcError) {
-	return textErr("not yet implemented")
+func (s *Server) handleRunAudit(ctx context.Context, _ map[string]interface{}) (CallResult, *rpcError) {
+	if !s.runMu.TryLock() {
+		return textErr("audit already in progress")
+	}
+	defer s.runMu.Unlock()
+
+	exe, err := os.Executable()
+	if err != nil {
+		return textErr("could not resolve oxaudit binary: " + err.Error())
+	}
+
+	cmd := exec.CommandContext(ctx, exe, "all")
+	out, err := cmd.CombinedOutput()
+	output := string(out)
+	if err != nil {
+		return textErr(fmt.Sprintf("audit failed:\n%s", output))
+	}
+
+	// Refresh auditRunID to pick up the newly completed run.
+	s.mu.Lock()
+	var newRunID string
+	s.db.QueryRowContext(ctx,
+		`SELECT id FROM audit_run WHERE status = 'complete' ORDER BY executed_at DESC LIMIT 1`,
+	).Scan(&newRunID)
+	if newRunID != "" {
+		s.auditRunID = newRunID
+	}
+	s.mu.Unlock()
+
+	return textOK(map[string]interface{}{
+		"status": "complete",
+		"output": output,
+	})
 }
