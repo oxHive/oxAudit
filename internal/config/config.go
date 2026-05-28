@@ -48,13 +48,6 @@ type Config struct {
 		Workers int `yaml:"workers"`
 	} `yaml:"concurrency"`
 
-	Embeddings struct {
-		Enabled    bool   `yaml:"enabled"`
-		Provider   string `yaml:"provider"`
-		Model      string `yaml:"model"`
-		Dimensions int    `yaml:"dimensions"`
-		BatchSize  int    `yaml:"batch_size"`
-	} `yaml:"embeddings"`
 }
 
 // ResolvePath expands a leading ~ to the user home directory.
