@@ -10,6 +10,8 @@ import (
 )
 
 type Config struct {
+	configPath string // set by Load; DBPath/ConfigDir derive from this
+
 	AWS struct {
 		Profile       string `yaml:"profile"`
 		BillingRegion string `yaml:"billing_region"`
@@ -92,6 +94,7 @@ func defaults() Config {
 // Load reads a YAML config file and applies defaults for unset fields.
 func Load(path string) (*Config, error) {
 	cfg := defaults()
+	cfg.configPath = path
 
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -156,9 +159,19 @@ func (c *Config) Validate() error {
 	return nil
 }
 
+// ConfigDir returns the directory containing the config file.
+// Falls back to the resolved output directory if the config was not loaded from a file.
+func (c *Config) ConfigDir() string {
+	if c.configPath != "" {
+		return filepath.Dir(c.configPath)
+	}
+	return ResolvePath(c.Output.Directory)
+}
+
 // DBPath returns the path to the shared SQLite database.
+// The database always lives next to the config file, independent of output.directory.
 func (c *Config) DBPath() string {
-	return filepath.Join(ResolvePath(c.Output.Directory), "db", "aws_cost_audit.sqlite")
+	return filepath.Join(c.ConfigDir(), "db", "aws_cost_audit.sqlite")
 }
 
 // WriteDefault writes a default config.yaml to path (does not overwrite).

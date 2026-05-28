@@ -19,6 +19,48 @@ func TestDefaultDBPathUsesConfigDir(t *testing.T) {
 	}
 }
 
+func TestLoad_DBPathDerivedFromConfigPath(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "config.yaml")
+
+	yaml := `
+audit:
+  start_date: "2024-01-01"
+  end_date: "2024-01-31"
+output:
+  directory: /some/other/place
+`
+	if err := os.WriteFile(path, []byte(yaml), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	cfg, err := Load(path)
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+
+	// DB must live next to the config file, not under output.directory
+	want := filepath.Join(dir, "db", "aws_cost_audit.sqlite")
+	got := cfg.DBPath()
+	if got != want {
+		t.Errorf("DBPath = %s, want %s", got, want)
+	}
+}
+
+func TestConfigDir_fromLoadedConfig(t *testing.T) {
+	dir := t.TempDir()
+	path := filepath.Join(dir, "config.yaml")
+	os.WriteFile(path, []byte("audit:\n  start_date: x\n  end_date: x\n"), 0644)
+
+	cfg, err := Load(path)
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	if cfg.ConfigDir() != dir {
+		t.Errorf("ConfigDir = %s, want %s", cfg.ConfigDir(), dir)
+	}
+}
+
 func TestResolvePathExpandsTilde(t *testing.T) {
 	home, _ := os.UserHomeDir()
 	want := filepath.Join(home, ".config", "oxaudit")

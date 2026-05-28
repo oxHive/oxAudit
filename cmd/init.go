@@ -26,7 +26,7 @@ var initCmd = &cobra.Command{
 }
 
 func init() {
-	initCmd.Flags().StringVar(&initOutputDir, "output-dir", "~/.config/oxaudit", "root output directory")
+	initCmd.Flags().StringVar(&initOutputDir, "output-dir", "~/.config/oxaudit", "directory for config file and database")
 	initCmd.Flags().BoolVar(&initForce, "force", false, "overwrite existing config.yaml")
 	rootCmd.AddCommand(initCmd)
 }
@@ -36,19 +36,15 @@ func runInit(cmd *cobra.Command, args []string) error {
 	start := time.Now()
 	prog.StepStart(1, "init")
 
-	outDir := initOutputDir
+	outDir := config.ResolvePath(initOutputDir)
 	if cfgFile != "" {
 		// derive output dir from the config location if --config is set
 		outDir = filepath.Dir(cfgFile)
 	}
 
-	// Create directory layout
+	// Create config root layout — only the db dir lives here.
+	// Raw data, exports, and logs are created per-run under output.directory.
 	dirs := []string{
-		filepath.Join(outDir, "raw", "cost-explorer"),
-		filepath.Join(outDir, "raw", "inventory"),
-		filepath.Join(outDir, "raw", "recommendations"),
-		filepath.Join(outDir, "raw", "budgets"),
-		filepath.Join(outDir, "raw", "anomalies"),
 		filepath.Join(outDir, "db"),
 	}
 	for _, d := range dirs {
@@ -101,10 +97,11 @@ func runInit(cmd *cobra.Command, args []string) error {
 	}
 
 	prog.StepDone(1, "init", time.Since(start), "")
-	fmt.Printf("\nOutput directory : %s\n", outDir)
+	fmt.Printf("\nConfig & database: %s\n", outDir)
+	fmt.Printf("Config file      : %s\n", cfgPath)
 	fmt.Printf("Database         : %s\n", dbPath)
-	fmt.Printf("Config           : %s\n", cfgPath)
-	fmt.Println("\nEdit config.yaml to set your AWS profile and audit period, then run: oxaudit all")
+	fmt.Println("\nRun data (raw files, exports) will be written to output.directory in config.yaml.")
+	fmt.Println("Edit config.yaml to set your AWS profile, audit period, and output directory, then run: oxaudit all")
 	return nil
 }
 
