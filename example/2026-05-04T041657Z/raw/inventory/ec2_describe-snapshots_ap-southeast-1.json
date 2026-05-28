@@ -1,0 +1,228 @@
+{
+    "Snapshots": [
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-08-29T02:50:34.755000+00:00",
+            "FullSnapshotSizeInBytes": 30582243328,
+            "SnapshotId": "snap-027d875843fc4255a",
+            "VolumeId": "vol-03f8272b16c3ce1d1",
+            "State": "completed",
+            "StartTime": "2025-08-29T02:48:10.770000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-07970379c328e00f1) for ami-0fd65f8c8996cebdf",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "AMAZON_LINUX_BASE_IMAGE_DATE_08SEP25"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-09-08T08:38:29.570000+00:00",
+            "FullSnapshotSizeInBytes": 5405409280,
+            "SnapshotId": "snap-0805f0e4dc8bb09d8",
+            "VolumeId": "vol-004439746fe5c7137",
+            "State": "completed",
+            "StartTime": "2025-09-08T08:32:45.660000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0b70c0ddd6ba57ab9) for ami-0d82330afe7d2df8a",
+            "VolumeSize": 8,
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/abac10f8-567c-4448-8fb3-6bfc1c806420"
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "AMAZON_LINUX_BASE_IMAGE_DATE_03APR26"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-04-03T05:01:52.634000+00:00",
+            "FullSnapshotSizeInBytes": 3904897024,
+            "SnapshotId": "snap-007fbcadcb91d21f9",
+            "VolumeId": "vol-0bc2f571177246c7a",
+            "State": "completed",
+            "StartTime": "2026-04-03T04:59:27.041000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0a64989e33c1d6223) for ami-0b139d5abd82d0e11",
+            "VolumeSize": 15,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "AMAZON_LINUX_BASE_IMAGE_DATE_19JAN26"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-01-19T07:00:53.565000+00:00",
+            "FullSnapshotSizeInBytes": 2464153600,
+            "SnapshotId": "snap-0b9456524203bf204",
+            "VolumeId": "vol-0bc2f571177246c7a",
+            "State": "completed",
+            "StartTime": "2026-01-19T06:59:44.242000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0a64989e33c1d6223) for ami-04f772bb3f73304c9",
+            "VolumeSize": 15,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-04-24T07:11:54.194000+00:00",
+            "FullSnapshotSizeInBytes": 29103751168,
+            "SnapshotId": "snap-01d57b5b4abcb3359",
+            "VolumeId": "vol-05526b6770e44e399",
+            "State": "completed",
+            "StartTime": "2025-04-24T06:47:06.805000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0f0f567891c7e94eb) for ami-060b3fbb0040a3cc2",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "org",
+                    "Value": "ibe"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2023-05-26T02:24:50.430000+00:00",
+            "FullSnapshotSizeInBytes": 24440733696,
+            "SnapshotId": "snap-001e5a247aa15cd99",
+            "VolumeId": "vol-0a62ed09a1b2623ce",
+            "State": "completed",
+            "StartTime": "2023-05-26T02:22:13.469000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0a15e1bb268cb376a) for ami-0f9b2584dd9ab566c",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "AMAZON_LINUX_BASE_IMAGE-04-SEP-2025"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-09-04T04:22:07.288000+00:00",
+            "FullSnapshotSizeInBytes": 5284298752,
+            "SnapshotId": "snap-0304b11710d132da0",
+            "VolumeId": "vol-09e80b987dc40c4da",
+            "State": "completed",
+            "StartTime": "2025-09-04T04:20:24.928000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0bf593cd258376622) for ami-09bd764bdffe6422f",
+            "VolumeSize": 8,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "AMAZON_LINUX_BASE_IMAGE"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-08-29T06:27:43.329000+00:00",
+            "FullSnapshotSizeInBytes": 4652007424,
+            "SnapshotId": "snap-0e9fee9ef6c14133a",
+            "VolumeId": "vol-09e80b987dc40c4da",
+            "State": "completed",
+            "StartTime": "2025-08-29T06:26:33.233000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0bf593cd258376622) for ami-089fad4eca4fe870e",
+            "VolumeSize": 8,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-08-15T06:22:38.275000+00:00",
+            "FullSnapshotSizeInBytes": 32205963264,
+            "SnapshotId": "snap-07a48e9fae0e48c04",
+            "VolumeId": "vol-03d1beb3b85da82e6",
+            "State": "completed",
+            "StartTime": "2025-08-15T06:02:09.330000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-07954cb172320eaa0) for ami-0ab15e0f6afbe8cac",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2024-05-14T13:23:54.771000+00:00",
+            "FullSnapshotSizeInBytes": 29986127872,
+            "SnapshotId": "snap-06841a3255c3c4d17",
+            "VolumeId": "vol-052248be08b16aa0b",
+            "State": "completed",
+            "StartTime": "2024-05-14T13:15:31.999000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-05720f74091b32173) for ami-06d1c2598c47bca12",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2022-08-09T06:31:56.660000+00:00",
+            "FullSnapshotSizeInBytes": 21645754368,
+            "SnapshotId": "snap-04e6621b981c07f33",
+            "VolumeId": "vol-0fbd767cc02afd928",
+            "State": "completed",
+            "StartTime": "2022-08-09T06:26:35.996000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-085d06613388aad74) for ami-0159e8b23e01cb8b1",
+            "VolumeSize": 30,
+            "Encrypted": false
+        },
+        {
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "env-checkins-profile-api-dev-ibe-apse1-01"
+                }
+            ],
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2025-11-13T10:32:32.188000+00:00",
+            "FullSnapshotSizeInBytes": 9762242560,
+            "SnapshotId": "snap-05a4ae85b83feb8a4",
+            "VolumeId": "vol-0964d64f0bdc305ef",
+            "State": "completed",
+            "StartTime": "2025-11-13T10:31:40.157000+00:00",
+            "Progress": "100%",
+            "OwnerId": "626883896657",
+            "Description": "Created by CreateImage(i-0b163de1f760d1f4e) for ami-082f5a56e9347aa3f",
+            "VolumeSize": 30,
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/abac10f8-567c-4448-8fb3-6bfc1c806420"
+        }
+    ]
+}

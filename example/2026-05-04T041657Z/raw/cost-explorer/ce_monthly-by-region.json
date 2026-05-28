@@ -1,0 +1,351 @@
+{
+    "GroupDefinitions": [
+        {
+            "Type": "DIMENSION",
+            "Key": "REGION"
+        }
+    ],
+    "ResultsByTime": [
+        {
+            "TimePeriod": {
+                "Start": "2026-04-01",
+                "End": "2026-04-30"
+            },
+            "Total": {},
+            "Groups": [
+                {
+                    "Keys": [
+                        "NoRegion"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "23364.53",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "23364.53",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "af-south-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.7755995147",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.7755995147",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-northeast-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "18.3183024727",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "18.3183024727",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-northeast-2"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0299424697",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0299424697",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-northeast-3"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0251624785",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0251624785",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-south-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "21.0226954215",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "21.0226954215",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-southeast-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "216189.2217892042",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "216189.2217892042",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-southeast-2"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "46.4179004682",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "46.4179004682",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ap-southeast-3"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "589.4016511371",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "589.4016511371",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "ca-central-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "1.3964609282",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "1.3964609282",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "eu-central-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0339424174",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0339424174",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "eu-north-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0277674173",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0277674173",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "eu-west-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "57.2971201778",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "57.2971201778",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "eu-west-2"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0315624172",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0315624172",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "eu-west-3"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0272024172",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0272024172",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "global"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "84.3888391812",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "84.3888391812",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "me-south-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "7.6441623472",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "7.6441623472",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "sa-east-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "2.9569456925",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "2.9569456925",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "us-east-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "42.7328202533",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "42.7328202533",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "us-east-2"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0387874603",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0387874603",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "us-west-1"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0273624172",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0273624172",
+                            "Unit": "USD"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "us-west-2"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0420874172",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0420874172",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        }
+    ],
+    "DimensionValueAttributes": []
+}

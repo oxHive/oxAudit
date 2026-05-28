@@ -1,0 +1,340 @@
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "rds-dev-apse1-ibe",
+            "DBInstanceClass": "db.m5.xlarge",
+            "Engine": "sqlserver-ee",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "Endpoint": {
+                "Address": "rds-dev-apse1-ibe.cy7ogkjncdln.ap-southeast-1.rds.amazonaws.com",
+                "Port": 1433,
+                "HostedZoneId": "Z2G0U3KFCY8NZ5"
+            },
+            "AllocatedStorage": 50,
+            "InstanceCreateTime": "2025-05-27T04:59:46.810000+00:00",
+            "PreferredBackupWindow": "18:31-19:01",
+            "BackupRetentionPeriod": 7,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-035ef0bd4ef185a79",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "sql-v15-ee-dev-env",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1a",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "db-subnet-group-dev-apse1",
+                "DBSubnetGroupDescription": "Subnet Group for DB Connected to protected subnet",
+                "VpcId": "vpc-04b31b9fabf5f0eec",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-01463fe076bf786dc",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-0e1cd8f3a0d6a7e10",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "sat:16:59-sat:17:29",
+            "UpgradeRolloutOrder": "second",
+            "PendingModifiedValues": {},
+            "LatestRestorableTime": "2026-05-04T04:07:01+00:00",
+            "MultiAZ": false,
+            "EngineVersion": "15.00.4435.7.v1",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "license-included",
+            "Iops": 3000,
+            "StorageThroughput": 125,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:sqlserver-ee-15-00",
+                    "Status": "in-sync"
+                }
+            ],
+            "CharacterSetName": "SQL_Latin1_General_CP1_CI_AS",
+            "PubliclyAccessible": false,
+            "StorageType": "gp3",
+            "DbInstancePort": 0,
+            "StorageEncrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/3d11c88e-1de4-4b67-8c19-574f30fec769",
+            "DbiResourceId": "db-XGKU7EBR6YGFUXRO26E6NKHKAQ",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": true,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:ap-southeast-1:626883896657:db:rds-dev-apse1-ibe",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DatabaseInsightsMode": "standard",
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": true,
+            "AssociatedRoles": [],
+            "TagList": [],
+            "CustomerOwnedIpEnabled": false,
+            "NetworkType": "IPV4",
+            "ActivityStreamStatus": "stopped",
+            "BackupTarget": "region",
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-rsa2048-g1",
+                "ValidTill": "2028-09-23T13:24:44+00:00"
+            },
+            "DedicatedLogVolume": false
+        },
+        {
+            "DBInstanceIdentifier": "rds-prd-apse1-ibe",
+            "DBInstanceClass": "db.m6i.4xlarge",
+            "Engine": "sqlserver-ee",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "Endpoint": {
+                "Address": "rds-prd-apse1-ibe.cy7ogkjncdln.ap-southeast-1.rds.amazonaws.com",
+                "Port": 1433,
+                "HostedZoneId": "Z2G0U3KFCY8NZ5"
+            },
+            "AllocatedStorage": 299,
+            "InstanceCreateTime": "2025-08-09T20:18:12.016000+00:00",
+            "PreferredBackupWindow": "20:28-20:58",
+            "BackupRetentionPeriod": 30,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-0e974c0bd5cfb845d",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "sql-v15-ee",
+                    "ParameterApplyStatus": "pending-reboot"
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1a",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "db-subnet-group-prd-apse1",
+                "DBSubnetGroupDescription": "Subnet Group for DB Connected to protected subnet",
+                "VpcId": "vpc-04b31b9fabf5f0eec",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-0497b24fa09013b8b",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-0293c1aa82fff11a1",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-065e1f3d7806ca45f",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1c"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "fri:14:42-fri:15:12",
+            "UpgradeRolloutOrder": "second",
+            "PendingModifiedValues": {},
+            "LatestRestorableTime": "2026-05-04T04:08:02+00:00",
+            "MultiAZ": false,
+            "EngineVersion": "15.00.4385.2.v1",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [
+                "rds-prd-apse1-ibe-replica"
+            ],
+            "LicenseModel": "license-included",
+            "Iops": 1000,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:sqlserver-ee-15-00",
+                    "Status": "in-sync"
+                }
+            ],
+            "CharacterSetName": "SQL_Latin1_General_CP1_CI_AS",
+            "PubliclyAccessible": false,
+            "StorageType": "io1",
+            "DbInstancePort": 0,
+            "StorageEncrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/3d11c88e-1de4-4b67-8c19-574f30fec769",
+            "DbiResourceId": "db-RFPZTTBJ7SZENEM5EONWV6SMTM",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": true,
+            "MonitoringInterval": 60,
+            "EnhancedMonitoringResourceArn": "arn:aws:logs:ap-southeast-1:626883896657:log-group:RDSOSMetrics:log-stream:db-RFPZTTBJ7SZENEM5EONWV6SMTM",
+            "MonitoringRoleArn": "arn:aws:iam::626883896657:role/rds-monitoring-role",
+            "DBInstanceArn": "arn:aws:rds:ap-southeast-1:626883896657:db:rds-prd-apse1-ibe",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DatabaseInsightsMode": "standard",
+            "PerformanceInsightsEnabled": true,
+            "PerformanceInsightsKMSKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/3d11c88e-1de4-4b67-8c19-574f30fec769",
+            "PerformanceInsightsRetentionPeriod": 7,
+            "EnabledCloudwatchLogsExports": [
+                "agent",
+                "error"
+            ],
+            "DeletionProtection": true,
+            "AssociatedRoles": [],
+            "MaxAllocatedStorage": 400,
+            "TagList": [
+                {
+                    "Key": "Name",
+                    "Value": "rds-prd-apse1-ibe"
+                }
+            ],
+            "CustomerOwnedIpEnabled": false,
+            "NetworkType": "IPV4",
+            "ActivityStreamStatus": "stopped",
+            "BackupTarget": "region",
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-rsa2048-g1",
+                "ValidTill": "2028-08-08T20:35:54+00:00"
+            },
+            "DedicatedLogVolume": false
+        },
+        {
+            "DBInstanceIdentifier": "rds-prd-apse1-ibe-replica",
+            "DBInstanceClass": "db.m6i.4xlarge",
+            "Engine": "sqlserver-ee",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "Endpoint": {
+                "Address": "rds-prd-apse1-ibe-replica.cy7ogkjncdln.ap-southeast-1.rds.amazonaws.com",
+                "Port": 1433,
+                "HostedZoneId": "Z2G0U3KFCY8NZ5"
+            },
+            "AllocatedStorage": 288,
+            "InstanceCreateTime": "2025-08-09T21:04:04.009000+00:00",
+            "PreferredBackupWindow": "20:28-20:58",
+            "BackupRetentionPeriod": 0,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-0e974c0bd5cfb845d",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "sql-v15-ee",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1a",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "db-subnet-group-prd-apse1",
+                "DBSubnetGroupDescription": "Subnet Group for DB Connected to protected subnet",
+                "VpcId": "vpc-04b31b9fabf5f0eec",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-0497b24fa09013b8b",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-0293c1aa82fff11a1",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-065e1f3d7806ca45f",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1c"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "thu:14:42-thu:15:12",
+            "UpgradeRolloutOrder": "second",
+            "PendingModifiedValues": {},
+            "MultiAZ": false,
+            "EngineVersion": "15.00.4385.2.v1",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaSourceDBInstanceIdentifier": "rds-prd-apse1-ibe",
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "license-included",
+            "Iops": 1000,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:sqlserver-ee-15-00",
+                    "Status": "in-sync"
+                }
+            ],
+            "CharacterSetName": "SQL_Latin1_General_CP1_CI_AS",
+            "PubliclyAccessible": false,
+            "StatusInfos": [
+                {
+                    "StatusType": "read replication",
+                    "Normal": true,
+                    "Status": "replicating"
+                }
+            ],
+            "StorageType": "io1",
+            "DbInstancePort": 0,
+            "StorageEncrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/3d11c88e-1de4-4b67-8c19-574f30fec769",
+            "DbiResourceId": "db-7CSZE4CBDH3NNRK3D7UBPUZL7A",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 60,
+            "EnhancedMonitoringResourceArn": "arn:aws:logs:ap-southeast-1:626883896657:log-group:RDSOSMetrics:log-stream:db-7CSZE4CBDH3NNRK3D7UBPUZL7A",
+            "MonitoringRoleArn": "arn:aws:iam::626883896657:role/rds-monitoring-role",
+            "DBInstanceArn": "arn:aws:rds:ap-southeast-1:626883896657:db:rds-prd-apse1-ibe-replica",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "DatabaseInsightsMode": "standard",
+            "PerformanceInsightsEnabled": true,
+            "PerformanceInsightsKMSKeyId": "arn:aws:kms:ap-southeast-1:626883896657:key/3d11c88e-1de4-4b67-8c19-574f30fec769",
+            "PerformanceInsightsRetentionPeriod": 7,
+            "DeletionProtection": true,
+            "AssociatedRoles": [],
+            "MaxAllocatedStorage": 400,
+            "TagList": [],
+            "CustomerOwnedIpEnabled": false,
+            "NetworkType": "IPV4",
+            "ActivityStreamStatus": "stopped",
+            "BackupTarget": "region",
+            "CertificateDetails": {
+                "CAIdentifier": "rds-ca-rsa2048-g1",
+                "ValidTill": "2028-08-08T21:01:06+00:00"
+            },
+            "DedicatedLogVolume": false
+        }
+    ]
+}

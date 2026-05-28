@@ -1,0 +1,35 @@
+# oxAudit configuration
+# Edit start_date and end_date before running.
+
+aws:
+  profile: default
+  billing_region: ap-southeast-1
+  regions:
+    mode: manual
+    include:
+      - ap-southeast-1
+    exclude: []
+audit:
+  start_date: "2026-04-01"
+  end_date: "2026-05-27"
+  name: ""
+  notes: ""
+output:
+  directory: ./aws-cost-audit
+analysis:
+  old_snapshot_threshold_days: 90
+  stopped_ec2_threshold_days: 30
+  unattached_ebs_threshold_days: 7
+  min_monthly_savings_usd: 5
+  required_tags: []
+  nat_cost_threshold_usd: 100
+  cw_logs_cost_threshold_usd: 50
+  anomaly_stddev_multiplier: 2
+concurrency:
+  workers: 3
+embeddings:
+  enabled: false
+  provider: ""
+  model: ""
+  dimensions: 0
+  batch_size: 0

@@ -1,0 +1,648 @@
+{
+    "GroupDefinitions": [
+        {
+            "Type": "DIMENSION",
+            "Key": "SERVICE"
+        }
+    ],
+    "ResultsByTime": [
+        {
+            "TimePeriod": {
+                "Start": "2026-04-01",
+                "End": "2026-04-30"
+            },
+            "Total": {},
+            "Groups": [
+                {
+                    "Keys": [
+                        "AWS Amplify"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0034701513",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0034701513",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "0.0726347715",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS CloudFormation"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "25615",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS CloudShell"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0000005334",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0000005334",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "0.0744852394",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS CloudTrail"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "835.0398",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "835.0398",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "83503980",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Config"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "260.802",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "260.802",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "86934",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Glue"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "2060.1666666512",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Key Management Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "7.9442813952",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "7.9442813952",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "70323.7333333952",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Lambda"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "11.0126056338",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "11.0126056338",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "8171755.507204581",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Secrets Manager"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "191.6250010235",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "191.6250010235",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "5762644.034510752",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Security Hub"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "146.00822",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "146.00822",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "1025487",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS Step Functions"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0000000277",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0000000277",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "0.0000037215",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AWS X-Ray"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "2",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon CloudFront"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "7335.7614622003",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "7335.7614622003",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "169058267.84541425",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon DynamoDB"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.0073337964",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.0073337964",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "27498.5012121167",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon EC2 Container Registry (ECR)"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "1.2744131813",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "1.2744131813",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "12.7441313928",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon ElastiCache"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "13070.9064165291",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "13070.9064165291",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "50192311655.27415",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "EC2 - Other"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "37437.346815618",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "37437.346815618",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "1224073.5415861234",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Elastic Compute Cloud - Compute"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "23343.1398538969",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "23343.1398538969",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "214825.8000873758",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Elastic Container Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "1.9666314003",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "1.9666314003",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "32393.6820728671",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Elastic Load Balancing"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "30422.9304361721",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "30422.9304361721",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "2571191.946963919",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon GuardDuty"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "3990.9329211347",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "3990.9329211347",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "7075160561.07654",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Inspector"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "464.489941824",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "464.489941824",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "237198.24686729",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon OpenSearch Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "12.4406990337",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "12.4406990337",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "213.4399046084",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Relational Database Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "15505.9663475975",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "15505.9663475975",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "5967.4711620987",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Route 53"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "26.1763392",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "26.1763392",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "64781170",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Simple Email Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "148.0198796368",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "148.0198796368",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "1302740.132595804",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Simple Notification Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "0.688185033",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "0.688185033",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "2241457.656643129",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Simple Queue Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "5.0165483451",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "5.0165483451",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "13533608.035800206",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Simple Storage Service"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "70732.4965962426",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "70732.4965962426",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "29962194658.856617",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Amazon Virtual Private Cloud"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "565.6543068288",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "565.6543068288",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "33381.1582385171",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "AmazonCloudWatch"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "12538.0682547926",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "12538.0682547926",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "1073731.536404683",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "CloudWatch Events"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "6.1393424825",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "6.1393424825",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "6133488.924842151",
+                            "Unit": "N/A"
+                        }
+                    }
+                },
+                {
+                    "Keys": [
+                        "Tax"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "23364.53",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "23364.53",
+                            "Unit": "USD"
+                        },
+                        "UsageQuantity": {
+                            "Amount": "0",
+                            "Unit": "N/A"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        }
+    ],
+    "DimensionValueAttributes": []
+}

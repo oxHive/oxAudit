@@ -1,0 +1,43 @@
+{
+    "GroupDefinitions": [
+        {
+            "Type": "DIMENSION",
+            "Key": "LINKED_ACCOUNT"
+        }
+    ],
+    "ResultsByTime": [
+        {
+            "TimePeriod": {
+                "Start": "2026-04-01",
+                "End": "2026-04-30"
+            },
+            "Total": {},
+            "Groups": [
+                {
+                    "Keys": [
+                        "626883896657"
+                    ],
+                    "Metrics": {
+                        "AmortizedCost": {
+                            "Amount": "240426.3881037106",
+                            "Unit": "USD"
+                        },
+                        "UnblendedCost": {
+                            "Amount": "240426.3881037106",
+                            "Unit": "USD"
+                        }
+                    }
+                }
+            ],
+            "Estimated": false
+        }
+    ],
+    "DimensionValueAttributes": [
+        {
+            "Value": "626883896657",
+            "Attributes": {
+                "description": "BookCabinIBE"
+            }
+        }
+    ]
+}
